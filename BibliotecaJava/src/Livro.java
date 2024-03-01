@@ -23,7 +23,10 @@ public abstract class Livro {
     public void setISBN(int iSBN) {
         ISBN = iSBN;
     }
+    public Boolean isStatus(){
+        return status;
 
+    }
     public String getStatus() {
         if (status == true) {
             return "Disponivel";
