@@ -1,19 +1,25 @@
 public class Usuario {
-    private String nome;
-    private int id;
-
-    public Usuario(String nome, int id) {
-        this.nome = nome;
-        this.id = id;
-    }
-
-    // Getters e setters
-
-    public String getNome() {
-        return nome;
-    }
-
-    public int getId() {
-        return id;
-    }
+	private String nome;
+	private String Id;
+	
+	
+	public Usuario(String nome, String Id) {
+		this.nome = nome;
+		this.Id = Id;
+	
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getId() {
+		return Id;
+	}
+	public void setId(String Id) {
+		this.Id = Id;
+	}
+	
+	
 }
