@@ -1,4 +1,10 @@
+package servicos;
 import java.util.ArrayList;
+
+import entidade.Usuario;
+import interfaces.IUsarioPServico;
+import interfaces.IUsuarioServico;
+import repositorios.UsuarioRepositorio;
 
 public class UsuarioServico implements IUsuarioServico,IUsarioPServico{
 	private UsuarioRepositorio UsuarioRepo=new UsuarioRepositorio();

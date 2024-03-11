@@ -1,3 +1,4 @@
+package entidade;
 public class LivroDigital extends Livro{
 
     public String toString(){

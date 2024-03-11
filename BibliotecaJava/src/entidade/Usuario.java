@@ -1,3 +1,4 @@
+package entidade;
 public class Usuario {
 	private String nome;
 	private String Id;

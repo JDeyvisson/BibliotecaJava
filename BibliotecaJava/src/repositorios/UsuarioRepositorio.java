@@ -1,4 +1,7 @@
+package repositorios;
 import java.util.ArrayList;
+
+import entidade.Usuario;
 
 public class UsuarioRepositorio {
 	private ArrayList<Usuario> UsuarioBD=new ArrayList<Usuario>();

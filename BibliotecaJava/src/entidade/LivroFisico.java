@@ -1,5 +1,4 @@
-
-
+package entidade;
 public class LivroFisico extends Livro {
 
     public String toString(){

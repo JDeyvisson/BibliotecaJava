@@ -1,4 +1,6 @@
+package interfaces;
 
+import entidade.Usuario;
 
 public interface IUsuarioServico {
 	public void cadastrar(Usuario novoUsuario);
