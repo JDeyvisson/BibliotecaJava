@@ -4,8 +4,15 @@ public abstract class Livro {
     private String autor;
     private int ISBN;
     private boolean status;
-
+    private boolean fisico;
     
+    public boolean isFisico() {
+        return fisico;
+    }
+
+    public void setFisico(boolean fisico) {
+        this.fisico = fisico;
+    }
     public String getTitulo() {
         return titulo;
     }
@@ -47,5 +54,14 @@ public abstract class Livro {
         status = true;
     }
 
-    
+    public String toString(){
+        return
+                "Nome: " + getTitulo() + "\n" +
+                "Autor: " + getAutor() + "\n" +
+                "ISBN: " + getISBN() + "\n" +
+                "Status: " + getStatus() + "\n" + 
+                "-------------------";
+                
+
+    }    
 }
