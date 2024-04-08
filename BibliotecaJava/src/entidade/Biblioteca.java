@@ -25,4 +25,12 @@ public class Biblioteca {
     public void setAcervo(ArrayList<Livro> acervo) {
         Acervo = acervo;
     }
+    @Override
+    public String toString() {
+        return "Biblioteca [local=" + local + ", numero=" + numero + "]";
+    }
+    public Biblioteca(String local, int numero) {
+        this.local = local;
+        this.numero = numero;
+    }
 }

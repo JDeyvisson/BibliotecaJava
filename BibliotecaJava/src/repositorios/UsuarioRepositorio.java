@@ -1,28 +1,39 @@
 package repositorios;
-import java.util.ArrayList;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import entidade.Usuario;
 
+
 public class UsuarioRepositorio {
-	private ArrayList<Usuario> UsuarioBD=new ArrayList<Usuario>();
-	
-	public  void salvar(Usuario novoUsuario) {		
-			UsuarioBD.add(novoUsuario);
-	}
-	
-	public ArrayList<Usuario> listarTodos(){
-		return UsuarioBD;
-	}
-	
-	public Usuario pesquisarPorId(Usuario UsuarioP) {
-		Usuario resultadoPesquisa=null;
-		for (Usuario Usuario : UsuarioBD) {
-			if(Usuario.getId().equals(UsuarioP.getId())) {
-				resultadoPesquisa=Usuario;
-				break;
-			}			
-		}
-		return resultadoPesquisa;
-	}
-	
+    private Queue<Usuario> filaUsuarios;
+
+    public UsuarioRepositorio() {
+        this.filaUsuarios = new LinkedList<>();
+    }
+
+    // Adiciona um novo usuário à fila
+    public void adicionarUsuario(Usuario usuario) {
+        filaUsuarios.offer(usuario);
+    }
+
+    // Remove e retorna o próximo usuário da fila
+    public Usuario proximoUsuario() {
+        return filaUsuarios.poll();
+    }
+
+    // Verifica se a fila de usuários está vazia
+    public boolean filaVazia() {
+        return filaUsuarios.isEmpty();
+    }
+
+    // Retorna o número de usuários na fila
+    public int tamanhoFila() {
+        return filaUsuarios.size();
+    }
+
+    // Método para acessar a fila de usuários (para fins de visualização ou manipulação direta)
+    public Queue<Usuario> getFilaUsuarios() {
+        return filaUsuarios;
+    }
 }

@@ -1,10 +1,10 @@
 package entidade;
 public class Usuario {
 	private String nome;
-	private String Id;
+	private int Id;
 	
 	
-	public Usuario(String nome, String Id) {
+	public Usuario(String nome, int Id) {
 		this.nome = nome;
 		this.Id = Id;
 	
@@ -15,11 +15,15 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getId() {
+	public int getId() {
 		return Id;
 	}
-	public void setId(String Id) {
+	public void setId(int Id) {
 		this.Id = Id;
+	}
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", Id=" + Id + "]";
 	}
 	
 	
