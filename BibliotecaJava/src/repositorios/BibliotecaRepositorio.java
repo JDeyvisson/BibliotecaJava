@@ -1,5 +1,6 @@
 package repositorios;
 import entidade.Biblioteca;
+import interfaces.IBibliotecaRepositorio;
     
 class No {
     Biblioteca biblioteca;
@@ -11,7 +12,7 @@ class No {
     }
 }
 
-public class BibliotecaRepositorio {
+public class BibliotecaRepositorio implements IBibliotecaRepositorio {
     private No inicio;
 
     public BibliotecaRepositorio() {

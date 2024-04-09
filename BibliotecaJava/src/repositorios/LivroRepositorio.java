@@ -3,8 +3,9 @@ package repositorios;
 import java.util.Stack;
 
 import entidade.Livro;
+import interfaces.ILivroRepositorio;
 
-public class LivroRepositorio {
+public class LivroRepositorio implements ILivroRepositorio{
     private Stack<Livro> pilhaLivros;
 
     public LivroRepositorio() {

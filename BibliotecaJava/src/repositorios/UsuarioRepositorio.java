@@ -3,9 +3,10 @@ package repositorios;
 import java.util.LinkedList;
 import java.util.Queue;
 import entidade.Usuario;
+import interfaces.IUsuarioRepositorio;
 
 
-public class UsuarioRepositorio {
+public class UsuarioRepositorio implements IUsuarioRepositorio {
     private Queue<Usuario> filaUsuarios;
 
     public UsuarioRepositorio() {

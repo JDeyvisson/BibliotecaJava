@@ -1,5 +1,7 @@
 package servicos;
 
-public class LivroServico {
+import interfaces.ILivroServico;
+
+public class LivroServico implements ILivroServico {
     
 }
