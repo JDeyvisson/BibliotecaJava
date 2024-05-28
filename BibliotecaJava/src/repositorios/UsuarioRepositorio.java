@@ -1,40 +1,126 @@
 package repositorios;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import entidade.Usuario;
 import interfaces.IUsuarioRepositorio;
 
 
-public class UsuarioRepositorio implements IUsuarioRepositorio {
-    private Queue<Usuario> filaUsuarios;
+public class UsuarioRepositorio{ //implements IUsuarioRepositorio {
+    private static final String URL = "jdbc:mysql://localhost:3306/sistema_login";
+    private static final String USER = "root"; // altere conforme necessário
+    private static final String PASSWORD = "admin"; // altere conforme necessário
 
     public UsuarioRepositorio() {
-        this.filaUsuarios = new LinkedList<>();
+        // Carregar driver JDBC
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Adiciona um novo usuário à fila
+    public String acessarSistema(String login, String senha) {
+        String sql = "SELECT senha FROM usuarios WHERE login = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String senhaNoBanco = rs.getString("senha");
+                if (senha.equals(senhaNoBanco)) {
+                    return "Sistema acessado com sucesso!";
+                } else {
+                    return "Login ou senha inválidos.";
+                }
+            } else {
+                return "Login ou senha inválidos.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Erro de conexão com o banco de dados.";
+        }
+    }
+
     public void adicionarUsuario(Usuario usuario) {
-        filaUsuarios.offer(usuario);
+        String sql = "INSERT INTO usuarios (login, senha) VALUES (?, ?)";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getLogin());
+            stmt.setString(2, usuario.getSenha());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Remove e retorna o próximo usuário da fila
-    public Usuario proximoUsuario() {
-        return filaUsuarios.poll();
+    public boolean usuarioExiste(String login) {
+        String sql = "SELECT 1 FROM usuarios WHERE login = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    // Verifica se a fila de usuários está vazia
-    public boolean filaVazia() {
-        return filaUsuarios.isEmpty();
+    public String pesquisarUsuario(String login) {
+        if (login == null || login.isEmpty()) {
+            return "Campo login está vazio.";
+        }
+
+        String sql = "SELECT * FROM usuarios WHERE login = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return "Usuário encontrado: Login = " + rs.getString("login") + ", Senha = " + rs.getString("senha");
+            } else {
+                return "Usuário não encontrado.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Erro de conexão com o banco de dados.";
+        }
     }
 
-    // Retorna o número de usuários na fila
-    public int tamanhoFila() {
-        return filaUsuarios.size();
+    public String removerUsuario(String login) {
+        if (login == null || login.isEmpty()) {
+            return "Campo login está vazio.";
+        }
+
+        String sql = "DELETE FROM usuarios WHERE login = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                return "Usuário removido com sucesso.";
+            } else {
+                return "Usuário não encontrado.";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Erro de conexão com o banco de dados.";
+        }
     }
 
-    // Método para acessar a fila de usuários (para fins de visualização ou manipulação direta)
-    public Queue<Usuario> getFilaUsuarios() {
-        return filaUsuarios;
+    
+    /* 
+    @Override
+    public void adicionarUsuario(Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'adicionarUsuario'");
     }
+    */
 }

@@ -3,8 +3,11 @@ public class Livro {
     private String titulo;
     private String autor;
     private int ISBN;
+    private String genero;
     private boolean status;
     private boolean fisico;
+    private double valor;
+    private int qtd_paginas;
     
     public boolean isFisico() {
         return fisico;

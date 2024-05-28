@@ -6,7 +6,8 @@ public class Biblioteca {
     private String local;
     private int numero;
     private ArrayList<Livro> Acervo = new ArrayList<Livro>();
-    
+    private String gerente;
+
     public String getLocal() {
         return local;
     }
