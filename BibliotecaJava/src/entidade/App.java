@@ -1,14 +1,44 @@
 package entidade;
 
+import java.util.List;
 import java.util.Scanner;
 
 import repositorios.BibliotecaRepositorio;
+import repositorios.EtiquetaRepositorio;
 import repositorios.LivroRepositorio;
 import repositorios.UsuarioRepositorio;
 import servicos.UsuarioServico;
 
 public class App {
      public static void main(String[] args) {
+        EtiquetaRepositorio etiquetaDAO = new EtiquetaRepositorio();
+
+        Livro livro1 = new Livro("Livro A", null, 0);
+        Livro livro2 = new Livro("Livro B", null, 0);
+
+        // Cenário de sucesso: criar etiqueta
+        Etiqueta etiqueta1 = new Etiqueta("Etiqueta1", livro1);
+        etiquetaDAO.criarEtiqueta(etiqueta1);
+
+        // Cenário de falha: tentar criar uma etiqueta com nome repetido
+        Etiqueta etiqueta2 = new Etiqueta("Etiqueta1", livro2);
+        etiquetaDAO.criarEtiqueta(etiqueta2); // Isso deve gerar uma exceção de chave duplicada ou violação de restrição única
+
+        // Ler todas as etiquetas
+        List<Etiqueta> todasEtiquetas = etiquetaDAO.lerTodasEtiquetas();
+        for (Etiqueta etiqueta : todasEtiquetas) {
+            System.out.println("Etiqueta: " + etiqueta.getNome() + ", Livro: " + etiqueta.getLivro().getTitulo());
+        }
+
+        // Atualizar etiqueta
+        etiquetaDAO.atualizarEtiqueta("Etiqueta1", "NovaEtiqueta");
+
+        // Remover etiqueta
+        etiquetaDAO.removerEtiqueta("NovaEtiqueta");
+    }
+        
+        /* 
+
         UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio();
         UsuarioServico usuarioServico = new UsuarioServico(usuarioRepositorio);
         Scanner scanner = new Scanner(System.in);
@@ -60,10 +90,11 @@ public class App {
     livroRepositorio1.adicionarLivro(livro2);
     livroRepositorio1.exibirLivros();
     */
-
+    
         
 
 }
+
 
 
 

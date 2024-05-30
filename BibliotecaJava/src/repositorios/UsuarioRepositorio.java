@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import entidade.Usuario;
-import interfaces.IUsuarioRepositorio;
 
 
 public class UsuarioRepositorio{ //implements IUsuarioRepositorio {
@@ -116,11 +115,4 @@ public class UsuarioRepositorio{ //implements IUsuarioRepositorio {
     }
 
     
-    /* 
-    @Override
-    public void adicionarUsuario(Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'adicionarUsuario'");
-    }
-    */
 }
